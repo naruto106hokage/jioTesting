@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Auto Open Link</title>
+    <script type="text/javascript">
+        function getRoomID() {
+            // Try to parse roomId from the URL path
+            const pathParts = window.location.pathname.split('/');
+            return pathParts[pathParts.length - 1]; // Last part is assumed to be the roomId
+        }
+
+        window.onload = function() {
+            const roomId = getRoomID();
+            if (roomId) {
+                setTimeout(function() {
+                    window.location.href = `yourapp://room?roomId=${roomId}`;
+                }, 100); // 100ms delay
+
+                setTimeout(function() {
+                    document.getElementById("manualLink").style.display = "block";
+                }, 1000); // Show manual link after 1 second
+            }
+        }
+    </script>
+</head>
+<body>
+    <p>If the link doesn't open automatically, <a id="manualLink" href="#" style="display:none;">click here</a>.</p>
+
+    <script type="text/javascript">
+        const roomId = getRoomID();
+        if (roomId) {
+            document.getElementById("manualLink").href = `yourapp://room?roomId=${roomId}`;
+        }
+    </script>
+</body>
+</html>
