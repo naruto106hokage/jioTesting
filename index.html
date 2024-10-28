@@ -3,7 +3,6 @@
 <head>
     <title>Auto Open Link</title>
     <script type="text/javascript">
-        // Function to extract roomId from the URL
         function getRoomID() {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get('roomId');
@@ -12,12 +11,12 @@
         window.onload = function() {
             const roomId = getRoomID();
             if (roomId) {
-                // Try to open the app with the deep link containing the room ID
+                // Attempt to open the app with the deep link
                 setTimeout(function() {
                     window.location.href = `yourapp://room?roomId=${roomId}`;
                 }, 100); // 100ms delay
 
-                // Show manual link if automatic redirect fails
+                // Fallback to manual link in case of failure
                 setTimeout(function() {
                     document.getElementById("manualLink").style.display = "block";
                 }, 1000); // Show manual link after 1 second
@@ -29,7 +28,6 @@
     <p>If the link doesn't open automatically, <a id="manualLink" href="#" style="display:none;">click here</a>.</p>
 
     <script type="text/javascript">
-        // Update manual link to include the room ID dynamically
         const roomId = getRoomID();
         if (roomId) {
             document.getElementById("manualLink").href = `yourapp://room?roomId=${roomId}`;
